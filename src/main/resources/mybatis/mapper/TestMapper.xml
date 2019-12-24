@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.mapper.TestMapper">
+    <insert id="insertPost" parameterType="com.example.test.dao.postDTO">
+        INSERT INTO post_list(tablename,title,content,created_at) VALUES(#{tablename},#{title},#{content},#{created_at})
+    </insert>
+
+    <insert id="insertMember" parameterType="com.example.test.dao.memberDTO">
+        INSERT INTO members(id,pw,name,nickname,created_at) VALUES(#{id},#{pw},#{name},#{nickname},#{created_at})
+    </insert>
+
+    <select id="postList" resultType="com.example.test.dao.postDTO">
+        SELECT * FROM post_list ORDER BY created_at ASC
+    </select>
+
+    <select id="postDetail" parameterType="int" resultType="com.example.test.dao.postDTO">
+        SELECT tablename, title, content, created_at FROM post_list WHERE idx=#{idx}
+    </select>
+</mapper>
+

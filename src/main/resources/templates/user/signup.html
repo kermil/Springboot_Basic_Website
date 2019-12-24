@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>^-^ Basic Website ^-^</title>
+
+      <!-- Bootstrap Core CSS -->
+      <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+
+      <!-- Custom Fonts -->
+      <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+      <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic}" rel="stylesheet" type="text/css">
+      <link th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
+
+      <!-- Custom CSS -->
+      <link th:href="@{/css/stylish-portfolio.min.css}" rel="stylesheet">
+  </head>
+
+  <body id="page-top">
+
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+      <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+              <a class="js-scroll-trigger">Start</a>
+          </li>
+          <li class="sidebar-nav-item">
+              <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
+          </li>
+          <li class="sidebar-nav-item">
+              <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signin}">로그인</a>
+          </li>
+          <li class="sidebar-nav-item">
+              <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+          </li>
+          <li class="sidebar-nav-item">
+              <a class="js-scroll-trigger" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+          </li>
+          <li class="sidebar-nav-item">
+              <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/myinfo}">내정보</a>
+          </li>
+          <li class="sidebar-nav-item">
+              <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
+          </li>
+          <li class="sidebar-nav-item">
+              <a class="js-scroll-trigger" href="#contact">Contact</a>
+          </li>
+      </ul>
+  </nav>
+
+
+  <div class="container text-center">
+     <form th:action="@{/user/signup}" th:object="${memberDTO}" method="POST">
+         <h2>SIGN UP</h2>
+          <table>
+              <thead>
+              <tr>
+                  Basic Website의 회원가입 페이지 입니다. 각 항목을 빈칸 없이 입력 바랍니다.
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                  <th>ID</th>
+                  <td><input th:field="*{id}" type="text" placeholder="ID" required autofocus></td>
+                  <!--<td><input  type="button" id="user_id_check" value="중복 확인"></inputbutton></td>--><!--onclick="fn_userIDCheck()"-->
+<!--                  <td><lable th:utext="${IdError}" style="font-size: 15; color: #FF1C19;"></lable></td>-->
+                  <td><lable th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="font-size: 20; color: #FF1C19;"></lable></td>
+<!--                  <td><label th:if="${param.IdError}" style="font-size: 20; color: #FF1C19;">해당 아이디는 사용중입니다.</label></td>-->
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Password</th>
+                  <td><input th:field="*{password}" type="password" placeholder="Password" required></td>
+                  <td><lable th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></lable></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Name</th>
+                  <td><input th:field="*{name}" type="text" placeholder="Name" required></td>
+                  <td><lable th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></lable></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <th>Nickname</th>
+                  <td><input th:field="*{nickname}" type="text" placeholder="Nickname" required></td>
+                  <td><lable th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></lable></td>
+                  <td></td>
+              </tr>
+              </tbody>
+              <tfoot>
+              <tr><td><button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button></td></tr>
+              </tfoot>
+          </table>
+      </form>
+      <!--type="text/javascript"-->
+    </div> <!-- /container -->
+
+
+  <!-- Footer -->
+  <footer class="footer text-center" id="container">
+      <div class="container">
+          <ul class="list-inline mb-5">
+              <li class="list-inline-item">
+                  <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.co.kr">
+                      <i class="icon-social-facebook"></i>
+                  </a>
+              </li>
+              <li class="list-inline-item">
+                  <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com">
+                      <i class="icon-social-twitter"></i>
+                  </a>
+              </li>
+              <li class="list-inline-item">
+                  <a class="social-link rounded-circle text-white" href="https://github.com/kermil">
+                      <i class="icon-social-github"></i>
+                  </a>
+              </li>
+          </ul>
+          <p class="text-muted small mb-0">Copyright &copy; Seolhee Pyo</p>
+      </div>
+  </footer>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script th:src="@{../js/stylish-portfolio.min.js}"></script>
+  </body>
+</html>

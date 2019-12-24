@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>^-^ Basic Website ^-^</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic}" rel="stylesheet" type="text/css">
+    <link th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/stylish-portfolio.min.css}" rel="stylesheet">
+  </head>
+
+  <body id="page-top">
+
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger">Start</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signin}">로그인</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/myinfo}">내정보</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#contact">Contact</a>
+      </li>
+    </ul>
+  </nav>
+
+    <form th:action="@{/postProc}" method="POST">
+      <div>
+         <label>Table</label>
+         <input type="text" class="form-control" id="tidx" name="tidx" placeholder="input the table idx">
+      </div>
+      <div>
+        <label>Author</label>
+        <span sec:authentication='name'></span>
+      </div>
+      <div class="form-group">
+         <label>title</label>
+         <input type="text" class="form-control" id="title" name="title" placeholder="title">
+      </div>
+      <div class="form-group">
+         <label>content</label>
+         <textarea class="form-control" id="content" name="content"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="location.href='/blog'">go back to the blog</button>
+      <button type="submit" class="btn btn-primary">submit</button>
+    </form>
+
+
+
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+
+
+  </body>
+</html>
