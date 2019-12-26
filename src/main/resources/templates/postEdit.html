@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,35 +55,26 @@
     </ul>
   </nav>
 
-
-  <div class="blog-post">
-    <h2 class="blog-post-title">Sample blog post</h2>
-    <div class="form-group">
-        <label><b>게시판 넘버</b></label>
-        <p th:text="${postDetail.tidx}"></p>
-    </div>
-    <div class="form-group">
-      <label><b>제목</b></label>
-      <p th:text="${postDetail.title}"></p>
-    </div>
-    <div class="form-group">
-      <label><b>작성날짜</b></label>
-      <p th:text="${#temporals.format(postDetail.created_at, 'yyyy-MM-dd HH:mm')}"></p>
-    </div>
-    <div class="form-group">
-      <label><b>내용</b></label>
-      <p th:text="${postDetail.content}"></p>
-    </div>
-
-    <div class="card mb-4">
-      <button class="btn btn-primary" onclick="location.href='/blog/post'">POST</button>
-<!--              <form th:action="@{'/blog/post/'+${postDetail.idx}}" method=""></form>-->
-      <button th:if="${postDetail.author_midx} == ${memberIdx}" class="btn btn-primary" onclick="location.href='/blog/post/'+${postDetail.idx}" formmethod="patch">EDIT</button>
-    </div>
-  </div><!-- /.blog-post -->
-
-
-
+    <form th:action="@{'/blog/post/' + ${postDetail.idx}}" method="PATCH">
+      <div>
+         <label>Table</label>
+         <input type="text" class="form-control" id="tidx" name="tidx" th:value="${postDetail.tidx}" disabled>
+      </div>
+      <div>
+        <label>Author</label>
+        <span sec:authentication='name'></span>
+      </div>
+      <div class="form-group">
+         <label>title</label>
+         <input type="text" class="form-control" id="title" name="title" th:value="${postDetail.title}">
+      </div>
+      <div class="form-group">
+         <label>content</label>
+         <textarea class="form-control" id="content" name="content" th:value="${postDetail.content}"></textarea>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="location.href='/blog'">go back to the blog</button>
+      <button type="submit" class="btn btn-primary">submit</button>
+    </form>
 
   <!-- Footer -->
   <footer class="footer text-center" id="container">
@@ -109,19 +100,19 @@
     </div>
   </footer>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-    <!-- Bootstrap core JavaScript -->
-    <script th:src="@{vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+  <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-    <!-- Plugin JavaScript -->
-    <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+  <!-- Plugin JavaScript -->
+  <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
 
-    <!-- Custom scripts for this template -->
-    <script th:src="@{js/stylish-portfolio.min.js}"></script>
+  <!-- Custom scripts for this template -->
+  <script th:src="@{js/stylish-portfolio.min.js}"></script>
   </body>
 </html>

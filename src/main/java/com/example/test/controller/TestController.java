@@ -4,41 +4,27 @@ import com.example.test.dto.MemberDTO;
 import com.example.test.dto.PostDTO;
 import com.example.test.service.MemberService;
 import com.example.test.service.PostService;
-//import com.example.test.service.TestService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
-import javax.activation.CommandMap;
-import javax.servlet.http.HttpServletRequest;
+
 import javax.validation.Valid;
-import java.lang.reflect.MalformedParameterizedTypeException;
-import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.util.List;
 
 @Controller @AllArgsConstructor
 public class TestController {
     @Autowired
-//    TestService testService;
     private PostService postService;
     private MemberService memberService;
 
-    @GetMapping("/a")
-    public String maina(){/*(Model model) {
-        List<PostDTO> postDTOList = postService.selectPostlist();
-        model.addAttribute("postList", postDTOList);
-        System.out.print("postDTOList => ");
-        System.out.println(postDTOList);
-        return "blog";*/
-        return "index";
-    }
+
     @GetMapping("/")
     public ModelAndView main() {
         return new ModelAndView("index");
@@ -90,7 +76,7 @@ public class TestController {
 
 //    @GetMapping("/post")
 //    public String post() { return "blog_post"; }
-    @GetMapping("/post")
+    @GetMapping("/blog/post")
     public ModelAndView post() {
         return new ModelAndView("blog_post");
     }
@@ -101,7 +87,7 @@ public class TestController {
 //        postService.insertPost(postDTO);
 //        return "redirect:/blog";
 //    }
-    @PostMapping("/postProc")
+    @PostMapping("/blog/postProc")
     public ModelAndView insertPost(PostDTO postDTO, Principal principal) {
         postDTO.setAuthor_midx(memberService.getMemberIdx(principal.getName()));
         postService.insertPost(postDTO);
@@ -168,13 +154,10 @@ public class TestController {
         int check = memberService.selectMember(memberDTO.getId());
 
         if(check == 1) {
-            System.out.println("1");
             bindingResult.rejectValue("id","error.id", "해당 아이디는 사용중입니다.");
             modelAndView.setViewName("user/signup");
 
-
         } else {
-            System.out.println("2");
             memberService.insertMember(memberDTO);
 
             modelAndView.addObject("signup",true);
@@ -225,11 +208,30 @@ public class TestController {
 //
 //        return "postDetail";
 //    }
-    @GetMapping("/post/{idx}")
-    public ModelAndView postDetail(@PathVariable("idx") Long idx) {
-        PostDTO postDTO = postService.selectPost(idx);
+    @GetMapping("/blog/post/{idx}")
+    public ModelAndView postDetail(@PathVariable("idx") Long idx, Principal principal) {
         ModelAndView modelAndView = new ModelAndView("postDetail");
+        MemberDTO memberDTO = new MemberDTO();
+        Long memberIdx = memberService.getMemberIdx(principal.getName());
+        PostDTO postDTO = postService.selectPost(idx);
+
         modelAndView.addObject("postDetail", postDTO);
+        modelAndView.addObject("memberIdx", memberIdx);
+
+        return modelAndView;
+    }
+
+    @PatchMapping("/blog/post/{idx}")
+    public ModelAndView postPatch(@PathVariable("idx") Long idx, Principal principal) {
+        ModelAndView modelAndView = new ModelAndView();
+        PostDTO postDTO = postService.selectPost(idx);
+        Long memberIdx = memberService.getMemberIdx(principal.getName());
+        if(postDTO.getAuthor_midx() != memberIdx) {
+            modelAndView.setViewName("redirect:/user/denied");
+        } else {
+            modelAndView.setViewName("postEdit");
+            modelAndView.addObject("postDetail", postDTO);
+        }
 
         return modelAndView;
     }
