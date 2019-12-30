@@ -32,6 +32,9 @@
         <a class="js-scroll-trigger">Start</a>
       </li>
       <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" th:href="@{/}">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
       </li>
       <li class="sidebar-nav-item">
@@ -56,43 +59,40 @@
   </nav>
 
 
-  <section class="content-section bg-primary text-white">
-    <div class="container text-center">
-      <div class="blog-post">
-        <h2 class="blog-post-title mb-4">Post List</h2>
-        <table>
-          <thead>
-          <tr>
-            <th>Board Number</th>
-            <th>Titles</th>
-            <th>Contents</th>
-            <th>Created At</th>
-          </tr>
-          </thead>
+  <section class="callout text-center content-section">
+<!--    <div class="container text-center">-->
+    <div class="text-center container">
+      <h2>post list</h2>
+<!--        <h2 class="blog-post-title mb-4">Post List</h2>-->
+      <table class="container">
+        <thead>
+        <tr>
+          <th>Board Number</th>
+          <th>Titles</th>
+          <th>Created At</th>
+        </tr>
+        </thead>
 
-          <tbody>
-          <!-- CONTENTS !-->
-          <tr th:each="post : ${postList}">
-            <td>
-              <span th:text="${post.tidx}"></span>
-            </td>
-            <td>
-              <a th:href="@{'/blog/post/' + ${post.idx}}">
-                <span th:text="${post.title}"></span>
-              </a>
-            </td>
-            <td>
-              <span th:text="${post.content}"></span>
-            </td>
-            <td>
-              <span th:text="${#temporals.format(post.created_at, 'yyyy-MM-dd HH:mm')}"></span>
+        <tbody>
+        <!-- CONTENTS !-->
+        <tr th:each="post : ${postList}">
+          <td>
+            <span th:text="${post.tidx}"></span>
+          </td>
+          <td>
+            <a th:href="@{'/blog/post/' + ${post.idx}}">
+              <span th:text="${post.title}"></span>
+            </a>
+          </td>
+          <td>
+            <span th:text="${#temporals.format(post.created_at, 'yyyy-MM-dd HH:mm')}"></span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <br><br>
+      <a class="btn btn-primary" sec:authorize="isAuthenticated()" onclick="location.href='/blog/post'">POST</a><br>
 
-            </td>
-          </tr>
-          </tbody>
-        </table>
-
-      </div>
     </div>
   </section>
 

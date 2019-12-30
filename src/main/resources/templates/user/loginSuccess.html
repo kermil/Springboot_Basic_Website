@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,15 +9,15 @@
     <title>^-^ Basic Website ^-^</title>
 
     <!-- Bootstrap Core CSS -->
-    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{../vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 
     <!-- Custom Fonts -->
-    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic}" rel="stylesheet" type="text/css">
-    <link th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
+    <link th:href="@{../vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link th:href="@{/css/stylish-portfolio.min.css}" rel="stylesheet">
+    <link th:href="@{../css/stylish-portfolio.min.css}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -30,6 +30,9 @@
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
             <a class="js-scroll-trigger">Start</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" th:href="@{/}">Home</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
@@ -54,11 +57,15 @@
         </li>
     </ul>
 </nav>
+
+
+<section class="content-section bg-primary text-white">
 <h1>로그인 성공!!</h1>
 <p>
     <span sec:authentication="name"></span>님 환영합니다~
 </p>
 <a th:href="@{'/'}">메인으로 이동</a>
+</section>
 
 
 <!-- Footer -->
@@ -91,13 +98,13 @@
 </a>
 
 <!-- Bootstrap core JavaScript -->
-<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{../vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{../vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 <!-- Plugin JavaScript -->
-<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+<script th:src="@{../vendor/jquery-easing/jquery.easing.min.js}"></script>
 
 <!-- Custom scripts for this template -->
-<script th:src="@{js/stylish-portfolio.min.js}"></script>
+<script th:src="@{../js/stylish-portfolio.min.js}"></script>
 </body>
 </html>

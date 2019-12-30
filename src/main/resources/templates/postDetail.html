@@ -1,127 +1,138 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>^-^ Basic Website ^-^</title>
+  <title>^-^ Basic Website ^-^</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+  <!-- Bootstrap Core CSS -->
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 
-    <!-- Custom Fonts -->
-    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
-    <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic}" rel="stylesheet" type="text/css">
-    <link th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic}" rel="stylesheet" type="text/css">
+  <link th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link th:href="@{/css/stylish-portfolio.min.css}" rel="stylesheet">
-  </head>
+  <!-- Custom CSS -->
+  <link th:href="@{/css/stylish-portfolio.min.css}" rel="stylesheet">
+</head>
 
-  <body id="page-top">
+<body id="page-top">
 
-  <!-- Navigation -->
-  <a class="menu-toggle rounded" href="#">
-    <i class="fas fa-bars"></i>
-  </a>
-  <nav id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-      <li class="sidebar-brand">
-        <a class="js-scroll-trigger">Start</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signin}">로그인</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/myinfo}">내정보</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
-      </li>
-      <li class="sidebar-nav-item">
-        <a class="js-scroll-trigger" href="#contact">Contact</a>
-      </li>
-    </ul>
-  </nav>
+<!-- Navigation -->
+<a class="menu-toggle rounded" href="#">
+  <i class="fas fa-bars"></i>
+</a>
+<nav id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand">
+      <a class="js-scroll-trigger">Start</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" th:href="@{/}">Home</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signin}">로그인</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/myinfo}">내정보</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">어드민</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="js-scroll-trigger" href="#contact">Contact</a>
+    </li>
+  </ul>
+</nav>
 
 
-  <div class="blog-post">
-    <h2 class="blog-post-title">Sample blog post</h2>
+  <div class="text-center content-section container" id="portfolio" style="background-color:teal;">
+    <h3 class="blog-post-title" style="color:white;">게시글 상세 내용</h3>
     <div class="form-group">
-        <label><b>게시판 넘버</b></label>
-        <p th:text="${postDetail.tidx}"></p>
-    </div>
-    <div class="form-group">
-      <label><b>제목</b></label>
-      <p th:text="${postDetail.title}"></p>
-    </div>
-    <div class="form-group">
-      <label><b>작성날짜</b></label>
-      <p th:text="${#temporals.format(postDetail.created_at, 'yyyy-MM-dd HH:mm')}"></p>
+        <label class="text-secondary mb-0"><b>게시판 넘버</b></label>
+        <p th:text="${postDetail.tidx}" class="mb-0"></p>
     </div>
     <div class="form-group">
-      <label><b>내용</b></label>
-      <p th:text="${postDetail.content}"></p>
+      <label class="text-secondary mb-0"><b>제목</b></label>
+      <p th:text="${postDetail.title}" class="mb-0"></p>
+    </div>
+    <div class="form-group">
+      <label class="text-secondary mb-0"><b>작성날짜</b></label>
+      <p th:text="${#temporals.format(postDetail.created_at, 'yyyy-MM-dd HH:mm')}" class="mb-0"></p>
+    </div>
+    <div class="form-group">
+      <label class="text-secondary mb-0"><b>내용</b></label>
+      <p th:text="${postDetail.content}" class="mb-0"></p>
+    </div><br><br>
+
+
+    <a class="btn btn-primary" sec:authorize="isAuthenticated()" onclick="location.href='/blog/post'">POST</a> <br sec:authorize="isAuthenticated()">
+    <br sec:authorize="isAuthenticated()"> <br sec:authorize="isAuthenticated()">
+    <a th:if="${postDetail.author_midx} == ${memberIdx}" class="btn btn-primary" th:href="@{'/blog/post/edit/'+${postDetail.idx}}">EDIT</a>
+    <br th:if="${postDetail.author_midx} == ${memberIdx}"> <br th:if="${postDetail.author_midx} == ${memberIdx}">
+    <a th:if="${postDetail.author_midx} == ${memberIdx}" class="btn btn-primary" th:href="@{'/blog/post/'+${postDetail.idx}+'?delete=true'}">DELETE</a>
+    <br th:if="${postDetail.author_midx} == ${memberIdx}"> <br th:if="${postDetail.author_midx} == ${memberIdx}">
+    <div th:each="res : ${param}">
+      <span th:if="${res.value[0] && res.key == 'delete'}" class="text-secondary mb-0">정말 삭제하시겠습니까?</span><br>
+      <a th:if="${res.value[0] && res.key == 'delete'}" th:href="@{'/blog/post/delete/'+${postDetail.idx}}" class="btn btn-primary">YES</a>&emsp;
+      <a th:if="${res.value[0] && res.key == 'delete'}" th:href="@{/blog}" class="btn btn-primary">NO</a>
     </div>
 
-    <div class="card mb-4">
-      <button class="btn btn-primary" onclick="location.href='/blog/post'">POST</button>
-<!--              <form th:action="@{'/blog/post/'+${postDetail.idx}}" method=""></form>-->
-      <button th:if="${postDetail.author_midx} == ${memberIdx}" class="btn btn-primary" onclick="location.href='/blog/post/'+${postDetail.idx}" formmethod="patch">EDIT</button>
-    </div>
+
   </div><!-- /.blog-post -->
 
 
 
+<!-- Footer -->
+<footer class="footer text-center" id="container">
+  <div class="container">
+    <ul class="list-inline mb-5">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.co.kr">
+          <i class="icon-social-facebook"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com">
+          <i class="icon-social-twitter"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="https://github.com/kermil">
+          <i class="icon-social-github"></i>
+        </a>
+      </li>
+    </ul>
+    <p class="text-muted small mb-0">Copyright &copy; Seolhee Pyo</p>
+  </div>
+</footer>
 
-  <!-- Footer -->
-  <footer class="footer text-center" id="container">
-    <div class="container">
-      <ul class="list-inline mb-5">
-        <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white mr-3" href="https://www.facebook.co.kr">
-            <i class="icon-social-facebook"></i>
-          </a>
-        </li>
-        <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white mr-3" href="https://www.twitter.com">
-            <i class="icon-social-twitter"></i>
-          </a>
-        </li>
-        <li class="list-inline-item">
-          <a class="social-link rounded-circle text-white" href="https://github.com/kermil">
-            <i class="icon-social-github"></i>
-          </a>
-        </li>
-      </ul>
-      <p class="text-muted small mb-0">Copyright &copy; Seolhee Pyo</p>
-    </div>
-  </footer>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-    <!-- Bootstrap core JavaScript -->
-    <script th:src="@{vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- Plugin JavaScript -->
+<script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
 
-    <!-- Plugin JavaScript -->
-    <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-
-    <!-- Custom scripts for this template -->
-    <script th:src="@{js/stylish-portfolio.min.js}"></script>
-  </body>
+<!-- Custom scripts for this template -->
+<script th:src="@{js/stylish-portfolio.min.js}"></script>
+</body>
 </html>

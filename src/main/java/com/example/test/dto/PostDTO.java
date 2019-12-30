@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Getter @Setter @ToString
 @NoArgsConstructor
-//@Builder(toBuilder = true)
 public class PostDTO {
     private Long tidx;
     private String title;

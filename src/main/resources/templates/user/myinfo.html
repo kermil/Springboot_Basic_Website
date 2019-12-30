@@ -9,15 +9,15 @@
     <title>^-^ Basic Website ^-^</title>
 
     <!-- Bootstrap Core CSS -->
-    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{../vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 
     <!-- Custom Fonts -->
-    <link th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{../vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic}" rel="stylesheet" type="text/css">
-    <link th:href="@{/vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
+    <link th:href="@{../vendor/simple-line-icons/css/simple-line-icons.css}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link th:href="@{/css/stylish-portfolio.min.css}" rel="stylesheet">
+    <link th:href="@{../css/stylish-portfolio.min.css}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -30,6 +30,9 @@
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
             <a class="js-scroll-trigger">Start</a>
+        </li>
+        <li class="sidebar-nav-item">
+            <a class="js-scroll-trigger" th:href="@{/}">Home</a>
         </li>
         <li class="sidebar-nav-item">
             <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
@@ -55,7 +58,7 @@
     </ul>
 </nav>
 
-
+<section class="content-section bg-primary text-white">
 <h1>내정보 확인 페이지입니다.</h1>
 <table>
     <thead>
@@ -85,6 +88,8 @@
     </tr>
     </tbody>
 </table>
+</section>
+
 
 <!-- Footer -->
 <footer class="footer text-center" id="container">

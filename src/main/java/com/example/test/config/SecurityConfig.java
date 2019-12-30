@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/myinfo").hasRole("MEMBER")
+                .antMatchers("/blog/post/**").authenticated()
                 .antMatchers("/**").permitAll()
                 .and() // 로그인 설정
                 .formLogin()
@@ -50,7 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
                 .logoutSuccessUrl("/user/logout/result")
+                .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
+                .and()
+                .rememberMe().key("remember-me").tokenValiditySeconds(300)
                 .and()
                 // 403 예외처리 핸들링
                 .exceptionHandling().accessDeniedPage("/user/denied");

@@ -32,6 +32,9 @@
         <a class="js-scroll-trigger">Start</a>
       </li>
       <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" th:href="@{/}">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
         <a class="js-scroll-trigger" th:href="@{/blog}">블로그</a>
       </li>
       <li class="sidebar-nav-item">
@@ -55,14 +58,14 @@
     </ul>
   </nav>
 
-    <form th:action="@{/blog/postProc}" method="POST">
+    <form th:action="@{/blog/post/proc}" method="POST" class="container">
       <div>
          <label>Table</label>
          <input type="text" class="form-control" id="tidx" name="tidx" placeholder="input the table idx">
       </div>
       <div>
         <label>Author</label>
-        <span sec:authentication='name'></span>
+        <input type="text" class="form-control" th:value="${author}" disabled>
       </div>
       <div class="form-group">
          <label>title</label>

@@ -25,6 +25,7 @@ public class PostService {
 
         for ( PostEntity PostEntity : postEntities) {
             PostDTO postDTO = PostDTO.builder()
+                    .tidx(PostEntity.getTidx())
                     .idx(PostEntity.getIdx())
                     .title(PostEntity.getTitle())
                     .content(PostEntity.getContent())
@@ -65,5 +66,6 @@ public class PostService {
     @Transactional
     public void deletePost(Long idx) {
         postRepository.deleteById(idx);
+
     }
 }

@@ -11,8 +11,6 @@ import javax.persistence.*;
 public class PostEntity extends TimeEntity {
 
     @Id
-//    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "notes_seq")
-//    @SequenceGenerator(sequenceName = "sequence_notes", allocationSize = 1, name = "notes_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
