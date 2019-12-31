@@ -77,7 +77,7 @@
         <!-- CONTENTS !-->
         <tr th:each="post : ${postList}">
           <td>
-            <span th:text="${post.tidx}"></span>
+            <span th:each="table:${tableList}" th:if="${table.idx} == ${post.tidx}" th:text="${table.name}"></span>
           </td>
           <td>
             <a th:href="@{'/blog/post/' + ${post.idx}}">

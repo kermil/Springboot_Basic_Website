@@ -62,7 +62,7 @@ public class TestController {
     @PostMapping("/admin/table")
     public ModelAndView addtable(@Valid TableDTO tableDTO) {
         tableService.insertTable(tableDTO);
-        ModelAndView modelAndView = new ModelAndView("redirect:/admin/index");
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin");
         return modelAndView;
     }
 
@@ -82,6 +82,18 @@ public class TestController {
     }
 
     @GetMapping("/admin/table/delete/{idx}")
+    public ModelAndView deltable(@PathVariable("idx")Long idx) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("table", tableService.selectTable(idx));
+        modelAndView.setViewName("admin/table_del");
+        return modelAndView;
+    }
+
+    @DeleteMapping("/admin/table/delete/{idx}")
+    public ModelAndView deltableProc(@PathVariable("idx")Long idx) {
+        tableService.deleteTable(idx);
+        return new ModelAndView("redirect:/admin");
+    }
 
     // 접근 거부 페이지
 //    @GetMapping("/user/denied")
@@ -219,6 +231,9 @@ public class TestController {
         ModelAndView modelAndView = new ModelAndView("blog");
         modelAndView.addObject("postList", postDTOList);
 
+        List<TableDTO> tableDTOList = tableService.selectTablelist();
+        modelAndView.addObject("tableList", tableDTOList);
+
         return modelAndView;
     }
 
@@ -231,6 +246,8 @@ public class TestController {
 
         modelAndView.setViewName("blog_post");
         modelAndView.addObject("author", principal.getName());
+        List<TableDTO> tableDTOList = tableService.selectTablelist();
+        modelAndView.addObject("tableList", tableDTOList);
         return modelAndView;
     }
 

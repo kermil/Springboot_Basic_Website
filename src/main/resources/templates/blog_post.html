@@ -60,8 +60,10 @@
 
     <form th:action="@{/blog/post/proc}" method="POST" class="container">
       <div>
-         <label>Table</label>
-         <input type="text" class="form-control" id="tidx" name="tidx" placeholder="input the table idx">
+       <label>Table</label><br>
+       <select name="tidx" class="form-control">
+         <option th:each="table:${tableList}" th:value="${table.idx}" th:text="${table.name}"></option>
+       </select>
       </div>
       <div>
         <label>Author</label>
